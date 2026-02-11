@@ -80,7 +80,7 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
             }
 
             if pawn && config.triggerbot.enabled {
-                ui.text_colored(cheat_list_one_color, "自动扳机");
+                ui.text_colored(cheat_list_one_color, "自动开火");
 
                 if !config.triggerbot.always {
                     ui.same_line();

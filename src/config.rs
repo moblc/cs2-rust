@@ -102,17 +102,6 @@ pub mod ProgramConfig {
         }
     }
 
-    pub mod Update {
-        pub const Enabled: bool = true;
-        pub const URL: &str = "https://code.snipcola.st/snipcola/cs2-helper/raw/branch/main/bin/cs2-helper.exe";
-        pub const CargoTomlURL: &str = "https://code.snipcola.st/snipcola/cs2-helper/raw/branch/main/Cargo.toml";
-    }
-
-    pub mod Links {
-        pub const Source: &str = "https://code.snipcola.st/snipcola/cs2-helper";
-        pub const License: &str = "https://code.snipcola.st/snipcola/cs2-helper/raw/branch/main/LICENSE";
-    }
-
     pub mod Keys {
         use glutin::event::VirtualKeyCode;
         use mki::Keyboard;

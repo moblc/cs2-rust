@@ -10,10 +10,8 @@ use std::thread::{self, sleep};
 
 use crate::config::ProgramConfig;
 
-use crate::utils::open::open_url;
 use crate::utils::cheat::process::{attach_process, get_process_amount};
 use crate::utils::cheat::config::{setup_config, update_configs};
-use crate::utils::cheat::updater::update_available;
 use crate::utils::messagebox::{create_messagebox, create_dialog, MessageBoxStyle, MessageBoxButtons, MessageBoxResult};
 
 use crate::cheat::classes::game::init_game_address;
@@ -27,16 +25,6 @@ fn main() {
 
     if get_process_amount(ProgramConfig::Package::Executable) > 1 || get_process_amount(&exe_pathbuf.file_name().unwrap().to_string_lossy()) > 1 {
         return create_messagebox(MessageBoxStyle::Error, "Already Running", &format!("{} is already running.", ProgramConfig::Package::Name));
-    }
-    
-    if !cfg!(debug_assertions) && ProgramConfig::Update::Enabled {
-        match update_available() {
-            Some(new_version) => match create_dialog(MessageBoxStyle::Info, MessageBoxButtons::YesNo, &format!("{} Available", new_version), &format!("{} {} is outdated, would you like to update?", ProgramConfig::Package::Name, ProgramConfig::Package::Version)) {
-                MessageBoxResult::Yes => return open_url(ProgramConfig::Update::URL),
-                _ => {}
-            },
-            None => {}
-        }
     }
 
     match setup_config() {

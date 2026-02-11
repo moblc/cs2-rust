@@ -10,7 +10,6 @@ use crate::ui::main::BG_ALPHA;
 use crate::ui::functions::{color_edit_u32_tuple, reset_window_positions};
 
 use crate::utils::cheat::config::{CONFIG, CONFIG_DIR, CONFIGS, Config, delete_config, DEFAULT_CONFIG, CONFIG_EXTENSION};
-use crate::utils::open::open_url;
 use crate::utils::messagebox::{MessageBoxStyle, create_messagebox};
 
 lazy_static! {
@@ -37,7 +36,7 @@ pub fn render_menu(ui: &mut Ui) {
 
     drop(reset_position);
 
-    ui.window("Menu")
+    ui.window("cs2助手")
         .collapsible(false)
         .always_auto_resize(true)
         .focus_on_appearing(true)
@@ -51,9 +50,9 @@ pub fn render_menu(ui: &mut Ui) {
 
             TabBar::new("Cheat").build(&ui, || {
                 // ESP
-                TabItem::new("ESP").build(&ui, || {
+                TabItem::new("绘制").build(&ui, || {
                     // Enabled
-                    ui.checkbox("ESP", &mut (*config).esp.enabled);
+                    ui.checkbox("绘制", &mut (*config).esp.enabled);
                     
                     if (*config).esp.enabled {
                         if !(*config).esp.always {
@@ -1097,18 +1096,6 @@ pub fn render_menu(ui: &mut Ui) {
                     // Info
                     ui.text(format!("Version: {}", ProgramConfig::Package::Version));
                     ui.text(format!("Author(s): {}", ProgramConfig::Package::Authors.replace(":", ", ")));
-                    ui.separator();
-
-                    // Links
-                    if ui.button("Source") {
-                        open_url(ProgramConfig::Links::Source);
-                    }
-
-                    ui.same_line();
-
-                    if ui.button("License") {
-                        open_url(ProgramConfig::Links::License);
-                    }
                 });
             });
 

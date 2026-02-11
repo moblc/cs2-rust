@@ -2,12 +2,14 @@ use windows::core::HSTRING;
 use windows::Win32::Foundation::HWND;
 use windows::Win32::UI::WindowsAndMessaging::{MessageBoxW, MESSAGEBOX_STYLE, MESSAGEBOX_RESULT, MB_ICONINFORMATION, MB_ICONWARNING, MB_ICONERROR, MB_OKCANCEL, MB_YESNO};
 
+#[allow(dead_code)]
 pub enum MessageBoxStyle {
     Info,
     Warning,
     Error
 }
 
+#[allow(dead_code)]
 pub enum MessageBoxButtons {
     OkCancel,
     YesNo

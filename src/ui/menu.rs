@@ -48,11 +48,11 @@ pub fn render_menu(ui: &mut Ui) {
             let bg_alpha = (*config).settings.toggle_bg_alpha;
             *BG_ALPHA.lock().unwrap() = bg_alpha;
 
-            TabBar::new("Cheat").build(&ui, || {
+            TabBar::new("功能").build(&ui, || {
                 // ESP
-                TabItem::new("绘制").build(&ui, || {
+                TabItem::new("透视").build(&ui, || {
                     // Enabled
-                    ui.checkbox("绘制", &mut (*config).esp.enabled);
+                    ui.checkbox("透视", &mut (*config).esp.enabled);
                     
                     if (*config).esp.enabled {
                         if !(*config).esp.always {
@@ -61,20 +61,20 @@ pub fn render_menu(ui: &mut Ui) {
                             ui.combo_simple_string("##KeyESP", &mut (*config).esp.key, &ProgramConfig::Keys::Available);
 
                             // Mode
-                            ui.combo_simple_string("Mode##ESP", &mut (*config).esp.mode, &["Hold", "Toggle"]);
+                            ui.combo_simple_string("模式##ESP", &mut (*config).esp.mode, &["按住", "切换"]);
                             ui.separator();
                         }
 
                         // Always & Default
-                        ui.checkbox("Always##ESP", &mut (*config).esp.always);
+                        ui.checkbox("始终开启##ESP", &mut (*config).esp.always);
                         
                         if !(*config).esp.always && (*config).esp.mode == 1 {
-                            ui.checkbox("Default Toggle##ESP", &mut (*config).esp.default);
+                            ui.checkbox("默认切换##ESP", &mut (*config).esp.default);
                         }
 
                         // Outline
                         ui.separator();
-                        ui.checkbox("Outline##ESP", &mut (*config).esp.outline);
+                        ui.checkbox("轮廓##ESP", &mut (*config).esp.outline);
 
                         // Thickness
                         ui.slider_config("Thickness##ESP", 0.5, 5.0).display_format("%.1f").build(&mut (*config).esp.thickness);
@@ -84,16 +84,16 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Box
-                        ui.checkbox("Box##ESP", &mut (*config).esp.box_enabled);
+                        ui.checkbox("方框##ESP", &mut (*config).esp.box_enabled);
                         
                         if (*config).esp.box_enabled {
                             ui.same_line();
                             color_edit_u32_tuple(ui, "##ColorESPBox", &mut (*config).esp.box_color);
                             ui.same_line();
-                            ui.combo_simple_string("##ModeESPBox", &mut (*config).esp.box_mode, &["Normal", "Dynamic"]);
+                            ui.combo_simple_string("##ModeESPBox", &mut (*config).esp.box_mode, &["普通", "动态"]);
 
                             // Box Target
-                            ui.checkbox("Target##ESPBox", &mut (*config).esp.box_target_enabled);
+                            ui.checkbox("目标##ESPBox", &mut (*config).esp.box_target_enabled);
 
                             if (*config).esp.box_target_enabled {
                                 ui.same_line();
@@ -102,7 +102,7 @@ pub fn render_menu(ui: &mut Ui) {
 
                             if (*config).settings.enabled && !(*config).settings.exclude_team {
                                 // Box Friendly
-                                ui.checkbox("Friendly##ESPBox", &mut (*config).esp.box_friendly_enabled);
+                                ui.checkbox("友军##ESPBox", &mut (*config).esp.box_friendly_enabled);
 
                                 if (*config).esp.box_friendly_enabled {
                                     ui.same_line();
@@ -111,7 +111,7 @@ pub fn render_menu(ui: &mut Ui) {
                             }
 
                             // Filled Box
-                            ui.checkbox("Filled##ESPBox", &mut (*config).esp.filled_box_enabled);
+                            ui.checkbox("填充##ESPBox", &mut (*config).esp.filled_box_enabled);
 
                             if (*config).esp.filled_box_enabled {
                                 ui.same_line();
@@ -131,7 +131,7 @@ pub fn render_menu(ui: &mut Ui) {
                         }
 
                         // Skeleton
-                        ui.checkbox("Skeleton##ESP", &mut (*config).esp.skeleton_enabled);
+                        ui.checkbox("骨骼##ESP", &mut (*config).esp.skeleton_enabled);
                         
                         if (*config).esp.skeleton_enabled {
                             ui.same_line();
@@ -139,17 +139,17 @@ pub fn render_menu(ui: &mut Ui) {
                         }
 
                         // Head
-                        ui.checkbox("Head##ESP", &mut (*config).esp.head_enabled);
+                        ui.checkbox("头部##ESP", &mut (*config).esp.head_enabled);
                         
                         if (*config).esp.head_enabled {
                             ui.same_line();
                             color_edit_u32_tuple(ui, "##ColorESPHead", &mut (*config).esp.head_color);
                             ui.same_line();
-                            ui.combo_simple_string("##ModeESPMode", &mut (*config).esp.head_mode, &["Outline", "Filled"]);
+                            ui.combo_simple_string("##ModeESPMode", &mut (*config).esp.head_mode, &["轮廓", "填充"]);
                         }
 
                         // Eye
-                        ui.checkbox("Eye##ESP", &mut (*config).esp.eye_ray_enabled);
+                        ui.checkbox("视线##ESP", &mut (*config).esp.eye_ray_enabled);
                         
                         if (*config).esp.eye_ray_enabled {
                             ui.same_line();
@@ -159,7 +159,7 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Health
-                        ui.checkbox("Health##ESP", &mut (*config).esp.health_bar_enabled);
+                        ui.checkbox("生命值##ESP", &mut (*config).esp.health_bar_enabled);
                         
                         if (*config).esp.health_bar_enabled {
                             ui.same_line();
@@ -171,7 +171,7 @@ pub fn render_menu(ui: &mut Ui) {
                         }
 
                         // Armor
-                        ui.checkbox("Armor##ESP", &mut (*config).esp.armor_bar_enabled);
+                        ui.checkbox("护甲##ESP", &mut (*config).esp.armor_bar_enabled);
 
                         if (*config).esp.armor_bar_enabled {
                             ui.same_line();
@@ -179,7 +179,7 @@ pub fn render_menu(ui: &mut Ui) {
                         }
 
                         // Ammo
-                        ui.checkbox("Ammo##ESP", &mut (*config).esp.ammo_bar_enabled);
+                        ui.checkbox("弹药##ESP", &mut (*config).esp.ammo_bar_enabled);
 
                         if (*config).esp.ammo_bar_enabled {
                             ui.same_line();
@@ -187,11 +187,11 @@ pub fn render_menu(ui: &mut Ui) {
                         }
 
                         // Bar Mode
-                        ui.combo_simple_string("Bar Mode##ESPBar", &mut (*config).esp.bar_mode, &["Vertical", "Horizontal"]);
+                        ui.combo_simple_string("血条模式##ESPBar", &mut (*config).esp.bar_mode, &["垂直", "水平"]);
                         ui.separator();
 
                         // Player Name
-                        ui.checkbox("Name##ESP", &mut (*config).esp.name_enabled);
+                        ui.checkbox("名称##ESP", &mut (*config).esp.name_enabled);
                         
                         if (*config).esp.name_enabled {
                             ui.same_line();
@@ -199,7 +199,7 @@ pub fn render_menu(ui: &mut Ui) {
                         }
 
                         // Weapon Name
-                        ui.checkbox("Weapon##ESP", &mut (*config).esp.weapon_name_enabled);
+                        ui.checkbox("武器##ESP", &mut (*config).esp.weapon_name_enabled);
                         
                         if (*config).esp.weapon_name_enabled {
                             ui.same_line();
@@ -207,7 +207,7 @@ pub fn render_menu(ui: &mut Ui) {
                         }
                         
                         // Distance
-                        ui.checkbox("Distance##ESP", &mut (*config).esp.distance_enabled);
+                        ui.checkbox("距离##ESP", &mut (*config).esp.distance_enabled);
                         
                         if (*config).esp.distance_enabled {
                             ui.same_line();
@@ -217,14 +217,14 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Bomb
-                        ui.checkbox("Bomb##ESP", &mut (*config).esp.bomb_enabled);
+                        ui.checkbox("炸弹##ESP", &mut (*config).esp.bomb_enabled);
 
                         if (*config).esp.bomb_enabled {
                             ui.same_line();
                             color_edit_u32_tuple(ui, "##ColorESPBomb", &mut (*config).esp.bomb_color);
                             
                             // Filled Bomb
-                            ui.checkbox("Filled##ESPBomb", &mut (*config).esp.filled_bomb_enabled);
+                            ui.checkbox("填充##ESPBomb", &mut (*config).esp.filled_bomb_enabled);
 
                             if (*config).esp.filled_bomb_enabled {
                                 ui.same_line();
@@ -238,17 +238,17 @@ pub fn render_menu(ui: &mut Ui) {
 
                         // Snap Line
                         ui.separator();
-                        ui.checkbox("Snapline##ESP", &mut (*config).esp.snap_line_enabled);
+                        ui.checkbox("射线##ESP", &mut (*config).esp.snap_line_enabled);
                         
                         if (*config).esp.snap_line_enabled {
                             ui.same_line();
                             color_edit_u32_tuple(ui, "##ColorESPSnapline", &mut (*config).esp.snap_line_color);
                             ui.same_line();
-                            ui.combo_simple_string("##ModeESPSnapline", &mut (*config).esp.snap_line_mode, &["Top", "Center", "Bottom"]);
+                            ui.combo_simple_string("##ModeESPSnapline", &mut (*config).esp.snap_line_mode, &["顶部", "中间", "底部"]);
                         }
 
                         // Headshot Line
-                        ui.checkbox("Headshot Line##ESP", &mut (*config).esp.headshot_line_enabled);
+                        ui.checkbox("爆头线##ESP", &mut (*config).esp.headshot_line_enabled);
                         
                         if (*config).esp.headshot_line_enabled {
                             ui.same_line();
@@ -258,9 +258,9 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // RCS
-                TabItem::new("RCS").build(&ui, || {
+                TabItem::new("后坐力控制").build(&ui, || {
                     // Enabled
-                    ui.checkbox("RCS", &mut (*config).rcs.enabled);
+                    ui.checkbox("后坐力控制", &mut (*config).rcs.enabled);
                     
                     if (*config).rcs.enabled {
                         if !(*config).rcs.always {
@@ -269,19 +269,19 @@ pub fn render_menu(ui: &mut Ui) {
                             ui.combo_simple_string("##KeyRCS", &mut (*config).rcs.key, &ProgramConfig::Keys::Available);
 
                             // Mode
-                            ui.combo_simple_string("Mode##RCS", &mut (*config).rcs.mode, &["Hold", "Toggle"]);
+                            ui.combo_simple_string("模式##RCS", &mut (*config).rcs.mode, &["按住", "切换"]);
                             ui.separator();
                         }
 
                         // Always & Default
-                        ui.checkbox("Always##RCS", &mut (*config).rcs.always);
+                        ui.checkbox("始终开启##RCS", &mut (*config).rcs.always);
                         
                         if !(*config).rcs.always && (*config).rcs.mode == 1 {
-                            ui.checkbox("Default Toggle##RCS", &mut (*config).rcs.default);
+                            ui.checkbox("默认切换##RCS", &mut (*config).rcs.default);
                         }
 
                         // Shared
-                        ui.checkbox("Shared##RCS", &mut (*config).rcs.shared);
+                        ui.checkbox("共享配置##RCS", &mut (*config).rcs.shared);
                         ui.separator();
 
                         // Sensitivity
@@ -343,9 +343,9 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Aimbot
-                TabItem::new("Aimbot").build(&ui, || {
+                TabItem::new("自瞄").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Aimbot", &mut (*config).aimbot.enabled);
+                    ui.checkbox("自瞄", &mut (*config).aimbot.enabled);
 
                     if (*config).aimbot.enabled {
                         if !(*config).aimbot.always {
@@ -354,23 +354,23 @@ pub fn render_menu(ui: &mut Ui) {
                             ui.combo_simple_string("##KeyAimbot", &mut (*config).aimbot.key, &ProgramConfig::Keys::Available);
     
                             // Mode
-                            ui.combo_simple_string("Mode##Aimbot", &mut (*config).aimbot.mode, &["Hold", "Toggle"]);
+                            ui.combo_simple_string("模式##Aimbot", &mut (*config).aimbot.mode, &["按住", "切换"]);
                             ui.separator();
                         }
 
                         // Always & Default
-                        ui.checkbox("Always##Aimbot", &mut (*config).aimbot.always);
+                        ui.checkbox("始终开启##Aimbot", &mut (*config).aimbot.always);
                         
                         if !(*config).aimbot.always && (*config).aimbot.mode == 1 {
-                            ui.checkbox("Default Toggle##Aimbot", &mut (*config).aimbot.default);
+                            ui.checkbox("默认切换##Aimbot", &mut (*config).aimbot.default);
                         }
 
                         // Shared
-                        ui.checkbox("Shared##Aimbot", &mut (*config).aimbot.shared);
+                        ui.checkbox("共享配置##Aimbot", &mut (*config).aimbot.shared);
                         ui.separator();
 
                         // Only Weapon
-                        ui.checkbox("Only Weapon##Aimbot", &mut (*config).aimbot.only_weapon);
+                        ui.checkbox("仅武器##Aimbot", &mut (*config).aimbot.only_weapon);
                         ui.separator();
 
                         // Function
@@ -379,14 +379,14 @@ pub fn render_menu(ui: &mut Ui) {
                                 let conf = $conf;
 
                                 // Circle
-                                ui.checkbox("Circle##Aimbot", &mut conf.fov_circle_enabled);
+                                ui.checkbox("范围圈##Aimbot", &mut conf.fov_circle_enabled);
                                 
                                 if conf.fov_circle_enabled {
                                     ui.same_line();
                                     color_edit_u32_tuple(ui, "##ColorAimbotCircle", &mut conf.fov_circle_color);
         
                                     // Circle Target
-                                    ui.checkbox("Target##AimbotCircle", &mut conf.fov_circle_target_enabled);
+                                    ui.checkbox("目标##AimbotCircle", &mut conf.fov_circle_target_enabled);
         
                                     if conf.fov_circle_target_enabled {
                                         ui.same_line();
@@ -394,10 +394,10 @@ pub fn render_menu(ui: &mut Ui) {
                                     }
         
                                     // Outline
-                                    ui.checkbox("Outline##AimbotCircle", &mut conf.fov_circle_outline_enabled);
+                                    ui.checkbox("轮廓##AimbotCircle", &mut conf.fov_circle_outline_enabled);
         
                                     // Only Toggled
-                                    ui.checkbox("Only Toggled##AimbotCircle", &mut conf.fov_circle_only_toggled);
+                                    ui.checkbox("仅切换时##AimbotCircle", &mut conf.fov_circle_only_toggled);
         
                                     // Thickness
                                     ui.slider_config("Thickness##AimbotCircle", 0.5, 5.0).display_format("%.1f").build(&mut conf.fov_circle_thickness);
@@ -405,15 +405,15 @@ pub fn render_menu(ui: &mut Ui) {
         
                                 // Only Visible, Only Grounded, & Only Weapon
                                 ui.separator();
-                                ui.checkbox("Only Visible##Aimbot", &mut conf.only_visible);
-                                ui.checkbox("Only Grounded##Aimbot", &mut conf.only_grounded);
+                                ui.checkbox("仅可见##Aimbot", &mut conf.only_visible);
+                                ui.checkbox("仅地面##Aimbot", &mut conf.only_grounded);
                                 ui.separator();
         
                                 // Bones
-                                ui.checkbox("Head##Aimbot", &mut conf.bone_head);
-                                ui.checkbox("Neck##Aimbot", &mut conf.bone_neck);
-                                ui.checkbox("Spine##Aimbot", &mut conf.bone_spine);
-                                ui.checkbox("Pelvis##Aimbot", &mut conf.bone_pelvis);
+                                ui.checkbox("头部##Aimbot", &mut conf.bone_head);
+                                ui.checkbox("颈部##Aimbot", &mut conf.bone_neck);
+                                ui.checkbox("脊柱##Aimbot", &mut conf.bone_spine);
+                                ui.checkbox("骨盆##Aimbot", &mut conf.bone_pelvis);
                                 ui.separator();
         
                                 ui.slider_config("Fov##Aimbot", 1, 89).display_format("%d").build(&mut conf.fov);
@@ -430,14 +430,14 @@ pub fn render_menu(ui: &mut Ui) {
                                 ui.separator();
 
                                 // Distance
-                                ui.checkbox("Min Distance##EnabledAimbot", &mut conf.min_distance_enabled);
+                                ui.checkbox("最小距离##EnabledAimbot", &mut conf.min_distance_enabled);
                                 
                                 if conf.min_distance_enabled {
                                     ui.same_line();
                                     ui.slider_config("##MinDistanceAimbot", 0, 150).display_format("%d").build(&mut conf.min_distance);
                                 }
 
-                                ui.checkbox("Max Distance##EnabledAimbot", &mut conf.max_distance_enabled);
+                                ui.checkbox("最大距离##EnabledAimbot", &mut conf.max_distance_enabled);
                                 
                                 if conf.max_distance_enabled {
                                     ui.same_line();
@@ -488,9 +488,9 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Triggerbot
-                TabItem::new("Triggerbot").build(&ui, || {
+                TabItem::new("自动开火").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Triggerbot", &mut (*config).triggerbot.enabled);
+                    ui.checkbox("自动开火", &mut (*config).triggerbot.enabled);
                     
                     if (*config).triggerbot.enabled {
                         if !(*config).triggerbot.always {
@@ -499,23 +499,23 @@ pub fn render_menu(ui: &mut Ui) {
                             ui.combo_simple_string("##KeyTriggerbot", &mut (*config).triggerbot.key, &ProgramConfig::Keys::Available);
 
                             // Mode
-                            ui.combo_simple_string("Mode##Triggerbot", &mut (*config).triggerbot.mode, &["Hold", "Toggle"]);
+                            ui.combo_simple_string("模式##Triggerbot", &mut (*config).triggerbot.mode, &["按住", "切换"]);
                             ui.separator();
                         }
 
                         // Always & Default
-                        ui.checkbox("Always##Triggerbot", &mut (*config).triggerbot.always);
+                        ui.checkbox("始终开启##Triggerbot", &mut (*config).triggerbot.always);
                         
                         if !(*config).triggerbot.always && (*config).triggerbot.mode == 1 {
-                            ui.checkbox("Default Toggle##Triggerbot", &mut (*config).triggerbot.default);
+                            ui.checkbox("默认切换##Triggerbot", &mut (*config).triggerbot.default);
                         }
 
                         // Shared
-                        ui.checkbox("Shared##Triggerbot", &mut (*config).triggerbot.shared);
+                        ui.checkbox("共享配置##Triggerbot", &mut (*config).triggerbot.shared);
                         ui.separator();
 
                         // Only Weapon
-                        ui.checkbox("Only Weapon##Triggerbot", &mut (*config).triggerbot.only_weapon);
+                        ui.checkbox("仅武器##Triggerbot", &mut (*config).triggerbot.only_weapon);
                         ui.separator();
                         
                         // Function
@@ -524,7 +524,7 @@ pub fn render_menu(ui: &mut Ui) {
                                 let conf = $conf;
 
                                 // Action
-                                ui.combo_simple_string("Action##Triggerbot", &mut conf.action, &["Click", "Press"]);
+                                ui.combo_simple_string("动作##Triggerbot", &mut conf.action, &["点击", "按压"]);
 
                                 if conf.action == 0 {
                                     // Interval
@@ -541,14 +541,14 @@ pub fn render_menu(ui: &mut Ui) {
                                 ui.separator();
 
                                 // Distance
-                                ui.checkbox("Min Distance##EnabledTriggerbot", &mut conf.min_distance_enabled);
+                                ui.checkbox("最小距离##EnabledTriggerbot", &mut conf.min_distance_enabled);
                                 
                                 if conf.min_distance_enabled {
                                     ui.same_line();
                                     ui.slider_config("##MinDistanceTriggerbot", 0, 150).display_format("%d").build(&mut conf.min_distance);
                                 }
 
-                                ui.checkbox("Max Distance##EnabledTriggerbot", &mut conf.max_distance_enabled);
+                                ui.checkbox("最大距离##EnabledTriggerbot", &mut conf.max_distance_enabled);
                                 
                                 if conf.max_distance_enabled {
                                     ui.same_line();
@@ -599,9 +599,9 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Crosshair
-                TabItem::new("Crosshair").build(&ui, || {
+                TabItem::new("准星").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Crosshair", &mut (*config).crosshair.enabled);
+                    ui.checkbox("准星", &mut (*config).crosshair.enabled);
                     
                     if (*config).crosshair.enabled {
                         if !(*config).crosshair.always {
@@ -610,23 +610,23 @@ pub fn render_menu(ui: &mut Ui) {
                             ui.combo_simple_string("##KeyCrosshair", &mut (*config).crosshair.key, &ProgramConfig::Keys::Available);
 
                             // Mode
-                            ui.combo_simple_string("Mode##Crosshair", &mut (*config).crosshair.mode, &["Hold", "Toggle"]);
+                            ui.combo_simple_string("模式##Crosshair", &mut (*config).crosshair.mode, &["按住", "切换"]);
                             ui.separator();
                         }
 
                         // Always & Default
-                        ui.checkbox("Always##Crosshair", &mut (*config).crosshair.always);
+                        ui.checkbox("始终开启##Crosshair", &mut (*config).crosshair.always);
                     
                         if !(*config).crosshair.always && (*config).crosshair.mode == 1 {
-                            ui.checkbox("Default Toggle##Crosshair", &mut (*config).crosshair.default);
+                            ui.checkbox("默认切换##Crosshair", &mut (*config).crosshair.default);
                         }
 
                         // Shared
-                        ui.checkbox("Shared##Crosshair", &mut (*config).crosshair.shared);
+                        ui.checkbox("共享配置##Crosshair", &mut (*config).crosshair.shared);
                         ui.separator();
 
                         // Only Weapon
-                        ui.checkbox("Only Weapon##Crosshair", &mut (*config).crosshair.only_weapon);
+                        ui.checkbox("仅武器##Crosshair", &mut (*config).crosshair.only_weapon);
                         ui.separator();
 
                         // Function
@@ -638,7 +638,7 @@ pub fn render_menu(ui: &mut Ui) {
                                 color_edit_u32_tuple(ui, "Color##Crosshair", &mut conf.color);
 
                                 // Target Crosshair
-                                ui.checkbox("Target##Crosshair", &mut conf.target_enabled);
+                                ui.checkbox("目标##Crosshair", &mut conf.target_enabled);
                                 
                                 if conf.target_enabled {
                                     ui.same_line();
@@ -646,11 +646,11 @@ pub fn render_menu(ui: &mut Ui) {
                                 }
 
                                 // Outline
-                                ui.checkbox("Outline##Crosshair", &mut conf.outline_enabled);
+                                ui.checkbox("轮廓##Crosshair", &mut conf.outline_enabled);
                                 ui.separator();
 
                                 // Dot
-                                ui.checkbox("Dot##Crosshair", &mut conf.dot_enabled);
+                                ui.checkbox("圆点##Crosshair", &mut conf.dot_enabled);
                                 
                                 if conf.dot_enabled {
                                     ui.same_line();
@@ -658,7 +658,7 @@ pub fn render_menu(ui: &mut Ui) {
                                 }
 
                                 // Circle
-                                ui.checkbox("Circle##Crosshair", &mut conf.circle_enabled);
+                                ui.checkbox("圆圈##Crosshair", &mut conf.circle_enabled);
 
                                 if conf.circle_enabled {
                                     ui.same_line();
@@ -666,7 +666,7 @@ pub fn render_menu(ui: &mut Ui) {
                                 }
 
                                 // Lines
-                                ui.checkbox("Lines##Crosshair", &mut conf.lines_enabled);
+                                ui.checkbox("线条##Crosshair", &mut conf.lines_enabled);
                                 
                                 if conf.lines_enabled {
                                     ui.slider_config("Width##CrosshairLines", 1, 20).display_format("%d").build(&mut conf.lines_width);
@@ -719,9 +719,9 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Radar
-                TabItem::new("Radar").build(&ui, || {
+                TabItem::new("雷达").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Radar", &mut (*config).radar.enabled);
+                    ui.checkbox("雷达", &mut (*config).radar.enabled);
                     
                     if (*config).radar.enabled {
                         if !(*config).radar.always {
@@ -730,23 +730,23 @@ pub fn render_menu(ui: &mut Ui) {
                             ui.combo_simple_string("##KeyRadar", &mut (*config).radar.key, &ProgramConfig::Keys::Available);
 
                             // Mode
-                            ui.combo_simple_string("Mode##Radar", &mut (*config).radar.mode, &["Hold", "Toggle"]);
+                            ui.combo_simple_string("模式##Radar", &mut (*config).radar.mode, &["按住", "切换"]);
                             ui.separator();
                         }
 
                         // Always & Default
-                        ui.checkbox("Always##Radar", &mut (*config).radar.always);
+                        ui.checkbox("始终开启##Radar", &mut (*config).radar.always);
                     
                         if !(*config).radar.always && (*config).radar.mode == 1 {
-                            ui.checkbox("Default Toggle##Radar", &mut (*config).radar.default);
+                            ui.checkbox("默认切换##Radar", &mut (*config).radar.default);
                         }
 
                         // Color
                         ui.separator();
-                        color_edit_u32_tuple(ui, "Color##Radar", &mut (*config).radar.color);
+                        color_edit_u32_tuple(ui, "颜色##Radar", &mut (*config).radar.color);
 
                         // Target
-                        ui.checkbox("Target##Radar", &mut (*config).radar.target_enabled);
+                        ui.checkbox("目标##Radar", &mut (*config).radar.target_enabled);
 
                         if (*config).radar.target_enabled {
                             ui.same_line();
@@ -755,7 +755,7 @@ pub fn render_menu(ui: &mut Ui) {
 
                         if (*config).settings.enabled && !(*config).settings.exclude_team {
                             // Friendly
-                            ui.checkbox("Friendly##Radar", &mut (*config).radar.friendly_enabled);
+                            ui.checkbox("友军##Radar", &mut (*config).radar.friendly_enabled);
 
                             if (*config).radar.friendly_enabled {
                                 ui.same_line();
@@ -765,17 +765,17 @@ pub fn render_menu(ui: &mut Ui) {
 
                         // Style
                         ui.separator();
-                        ui.combo_simple_string("Style##Radar", &mut (*config).radar.style, &["Circle", "Arrow", "Both"]);
+                        ui.combo_simple_string("样式##Radar", &mut (*config).radar.style, &["圆形", "箭头", "两者"]);
 
                         // Radar Alpha
                         ui.slider_config("Alpha##Radar", 0.0, 1.0).display_format("%.1f").build(&mut (*config).radar.alpha);
                         ui.separator();
 
                         // Radar Outline
-                        ui.checkbox("Outline##Radar", &mut (*config).radar.outline);
+                        ui.checkbox("轮廓##Radar", &mut (*config).radar.outline);
 
                         // Cross Line
-                        ui.checkbox("Crossline##Radar", &mut (*config).radar.crossline_enabled);
+                        ui.checkbox("十字线##Radar", &mut (*config).radar.crossline_enabled);
                         
                         if (*config).radar.crossline_enabled {
                             ui.same_line();
@@ -792,15 +792,15 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Misc
-                TabItem::new("Misc").build(&ui, || {
+                TabItem::new("杂项").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Misc", &mut (*config).misc.enabled);
+                    ui.checkbox("杂项", &mut (*config).misc.enabled);
 
                     if (*config).misc.enabled {
                         ui.separator();
 
                         // Watermark & Cheat List
-                        ui.checkbox("Watermark##Misc", &mut (*config).misc.watermark_enabled);
+                        ui.checkbox("水印##Misc", &mut (*config).misc.watermark_enabled);
 
                         if (*config).misc.watermark_enabled {
                             ui.same_line();
@@ -809,7 +809,7 @@ pub fn render_menu(ui: &mut Ui) {
                             color_edit_u32_tuple(ui, "##ColorMiscWatermarkTwo", &mut (*config).misc.watermark_color_two);
                         }
 
-                        ui.checkbox("Cheat List##Misc", &mut (*config).misc.cheat_list_enabled);
+                        ui.checkbox("功能列表##Misc", &mut (*config).misc.cheat_list_enabled);
 
                         if (*config).misc.cheat_list_enabled {
                             ui.same_line();
@@ -821,7 +821,7 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Bomb Timer & Spectator List
-                        ui.checkbox("Bomb Timer##Misc", &mut (*config).misc.bomb_timer_enabled);
+                        ui.checkbox("炸弹计时器##Misc", &mut (*config).misc.bomb_timer_enabled);
 
                         if (*config).misc.bomb_timer_enabled {
                             ui.same_line();
@@ -830,7 +830,7 @@ pub fn render_menu(ui: &mut Ui) {
                             color_edit_u32_tuple(ui, "##ColorMiscBombTimerEnabled", &mut (*config).misc.bomb_timer_color_enabled);
                         }
 
-                        ui.checkbox("Spectator List##Misc", &mut (*config).misc.spectator_list_enabled);
+                        ui.checkbox("观战列表##Misc", &mut (*config).misc.spectator_list_enabled);
 
                         if (*config).misc.spectator_list_enabled {
                             ui.same_line();
@@ -840,146 +840,146 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Style
-                TabItem::new("Style").build(&ui, || {
+                TabItem::new("样式").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Style", &mut (*config).style.enabled);
+                    ui.checkbox("样式", &mut (*config).style.enabled);
                     
                     if (*config).style.enabled {
                         // Alpha
                         ui.same_line();
-                        ui.slider_config("Alpha##Style", 0.2, 1.0).display_format("%.1f").build(&mut (*config).style.alpha);
+                        ui.slider_config("透明度##Style", 0.2, 1.0).display_format("%.1f").build(&mut (*config).style.alpha);
                         ui.separator();
 
                         // Window
-                        ui.slider_config("Window Padding X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.window_padding[0]);
+                        ui.slider_config("窗口内边距 X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.window_padding[0]);
                         ui.same_line();
-                        ui.slider_config("Window Padding Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.window_padding[1]);
-                        ui.slider_config("Window Rounding##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.window_rounding);
+                        ui.slider_config("窗口内边距 Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.window_padding[1]);
+                        ui.slider_config("窗口圆角##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.window_rounding);
                         ui.same_line();
-                        ui.slider_config("Window Border Size##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.window_border_size);
-                        ui.slider_config("Window Title Align X##Style", 0.0, 1.0).display_format("%.1f").build(&mut (*config).style.window_title_align[0]);
+                        ui.slider_config("窗口边框大小##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.window_border_size);
+                        ui.slider_config("窗口标题对齐 X##Style", 0.0, 1.0).display_format("%.1f").build(&mut (*config).style.window_title_align[0]);
                         ui.same_line();
-                        ui.slider_config("Window Title Align Y##Style", 0.0, 1.0).display_format("%.1f").build(&mut (*config).style.window_title_align[1]);
+                        ui.slider_config("窗口标题对齐 Y##Style", 0.0, 1.0).display_format("%.1f").build(&mut (*config).style.window_title_align[1]);
                         ui.separator();
 
                         // Frame
-                        ui.slider_config("Frame Padding X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.frame_padding[0]);
+                        ui.slider_config("框架内边距 X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.frame_padding[0]);
                         ui.same_line();
-                        ui.slider_config("Frame Padding Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.frame_padding[1]);
-                        ui.slider_config("Frame Rounding##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.frame_rounding);
+                        ui.slider_config("框架内边距 Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.frame_padding[1]);
+                        ui.slider_config("框架圆角##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.frame_rounding);
                         ui.same_line();
-                        ui.slider_config("Frame Border Size##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.frame_border_size);
+                        ui.slider_config("框架边框大小##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.frame_border_size);
                         ui.separator();
 
                         // Tab
-                        ui.slider_config("Tab Rounding##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.tab_rounding);
+                        ui.slider_config("标签圆角##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.tab_rounding);
                         ui.same_line();
-                        ui.slider_config("Tab Border Size##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.tab_border_size);
+                        ui.slider_config("标签边框大小##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.tab_border_size);
                         ui.separator();
 
                         // Scrollbar
-                        ui.slider_config("Scrollbar Rounding##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.scrollbar_rounding);
+                        ui.slider_config("滚动条圆角##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.scrollbar_rounding);
                         ui.same_line();
-                        ui.slider_config("Scrollbar Size##Style", 0.0, 15.0).display_format("%.1f").build(&mut (*config).style.scrollbar_size);
+                        ui.slider_config("滚动条大小##Style", 0.0, 15.0).display_format("%.1f").build(&mut (*config).style.scrollbar_size);
                         ui.separator();
 
                         // Popup
-                        ui.slider_config("Popup Rounding##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.popup_rounding);
+                        ui.slider_config("弹窗圆角##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.popup_rounding);
                         ui.same_line();
-                        ui.slider_config("Popup Border Size##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.popup_border_size);
+                        ui.slider_config("弹窗边框大小##Style", 0.0, 10.0).display_format("%.1f").build(&mut (*config).style.popup_border_size);
                         ui.separator();
 
                         // Item
-                        ui.slider_config("Item Spacing X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_spacing[0]);
+                        ui.slider_config("项目间距 X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_spacing[0]);
                         ui.same_line();
-                        ui.slider_config("Item Spacing Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_spacing[1]);
-                        ui.slider_config("Item Inner Spacing X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_inner_spacing[0]);
+                        ui.slider_config("项目间距 Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_spacing[1]);
+                        ui.slider_config("项目内间距 X##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_inner_spacing[0]);
                         ui.same_line();
-                        ui.slider_config("Item Inner Spacing Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_inner_spacing[1]);
+                        ui.slider_config("项目内间距 Y##Style", 0.0, 50.0).display_format("%.1f").build(&mut (*config).style.item_inner_spacing[1]);
                         ui.separator();
 
                         // Indent
-                        ui.slider_config("Indent Spacing##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.indent_spacing);
+                        ui.slider_config("缩进间距##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.indent_spacing);
                         ui.same_line();
 
                         // Grab
-                        ui.slider_config("Grab Rounding##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.grab_rounding);
+                        ui.slider_config("抓取圆角##Style", 0.0, 25.0).display_format("%.1f").build(&mut (*config).style.grab_rounding);
                         ui.separator();
 
                         // Colors
-                        color_edit_u32_tuple(ui, "Text##Style", &mut (*config).style.colors.text);
+                        color_edit_u32_tuple(ui, "文本##Style", &mut (*config).style.colors.text);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Text Disabled##Style", &mut (*config).style.colors.text_disabled);
+                        color_edit_u32_tuple(ui, "禁用文本##Style", &mut (*config).style.colors.text_disabled);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Window BG##Style", &mut (*config).style.colors.window_bg);
+                        color_edit_u32_tuple(ui, "窗口背景##Style", &mut (*config).style.colors.window_bg);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Child Window BG##Style", &mut (*config).style.colors.child_bg);
+                        color_edit_u32_tuple(ui, "子窗口背景##Style", &mut (*config).style.colors.child_bg);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Popup BG##Style", &mut (*config).style.colors.popup_bg);
+                        color_edit_u32_tuple(ui, "弹窗背景##Style", &mut (*config).style.colors.popup_bg);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Border##Style", &mut (*config).style.colors.border);
+                        color_edit_u32_tuple(ui, "边框##Style", &mut (*config).style.colors.border);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Border Shadow##Style", &mut (*config).style.colors.border_shadow);
+                        color_edit_u32_tuple(ui, "边框阴影##Style", &mut (*config).style.colors.border_shadow);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Frame BG##Style", &mut (*config).style.colors.frame_bg);
+                        color_edit_u32_tuple(ui, "框架背景##Style", &mut (*config).style.colors.frame_bg);
 
-                        color_edit_u32_tuple(ui, "Frame BG Hovered##Style", &mut (*config).style.colors.frame_bg_hovered);
+                        color_edit_u32_tuple(ui, "框架背景悬停##Style", &mut (*config).style.colors.frame_bg_hovered);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Frame BG Active##Style", &mut (*config).style.colors.frame_bg_active);
+                        color_edit_u32_tuple(ui, "框架背景激活##Style", &mut (*config).style.colors.frame_bg_active);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Title BG##Style", &mut (*config).style.colors.title_bg);
+                        color_edit_u32_tuple(ui, "标题背景##Style", &mut (*config).style.colors.title_bg);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Title BG Collapsed##Style", &mut (*config).style.colors.title_bg_collapsed);
+                        color_edit_u32_tuple(ui, "标题背景折叠##Style", &mut (*config).style.colors.title_bg_collapsed);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Title BG Active##Style", &mut (*config).style.colors.title_bg_active);
+                        color_edit_u32_tuple(ui, "标题背景激活##Style", &mut (*config).style.colors.title_bg_active);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Text Selected BG##Style", &mut (*config).style.colors.text_selected_bg);
+                        color_edit_u32_tuple(ui, "选中文本背景##Style", &mut (*config).style.colors.text_selected_bg);
 
-                        color_edit_u32_tuple(ui, "Checkmark##Style", &mut (*config).style.colors.checkmark);
+                        color_edit_u32_tuple(ui, "复选标记##Style", &mut (*config).style.colors.checkmark);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Scrollbar BG##Style", &mut (*config).style.colors.scrollbar_bg);
+                        color_edit_u32_tuple(ui, "滚动条背景##Style", &mut (*config).style.colors.scrollbar_bg);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Scrollbar Grab##Style", &mut (*config).style.colors.scrollbar_grab);
+                        color_edit_u32_tuple(ui, "滚动条抓取##Style", &mut (*config).style.colors.scrollbar_grab);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Scrollbar Grab Hovered##Style", &mut (*config).style.colors.scrollbar_grab_hovered);
+                        color_edit_u32_tuple(ui, "滚动条抓取悬停##Style", &mut (*config).style.colors.scrollbar_grab_hovered);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Scrollbar Grab Active##Style", &mut (*config).style.colors.scrollbar_grab_active);
+                        color_edit_u32_tuple(ui, "滚动条抓取激活##Style", &mut (*config).style.colors.scrollbar_grab_active);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Slider Grab##Style", &mut (*config).style.colors.slider_grab);
+                        color_edit_u32_tuple(ui, "滑块抓取##Style", &mut (*config).style.colors.slider_grab);
 
-                        color_edit_u32_tuple(ui, "Slider Grab Active##Style", &mut (*config).style.colors.slider_grab_active);
+                        color_edit_u32_tuple(ui, "滑块抓取激活##Style", &mut (*config).style.colors.slider_grab_active);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Button##Style", &mut (*config).style.colors.button);
+                        color_edit_u32_tuple(ui, "按钮##Style", &mut (*config).style.colors.button);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Button Hovered##Style", &mut (*config).style.colors.button_hovered);
+                        color_edit_u32_tuple(ui, "按钮悬停##Style", &mut (*config).style.colors.button_hovered);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Button Active##Style", &mut (*config).style.colors.button_active);
+                        color_edit_u32_tuple(ui, "按钮激活##Style", &mut (*config).style.colors.button_active);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Tab##Style", &mut (*config).style.colors.tab);
+                        color_edit_u32_tuple(ui, "标签##Style", &mut (*config).style.colors.tab);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Tab Hovered##Style", &mut (*config).style.colors.tab_hovered);
+                        color_edit_u32_tuple(ui, "标签悬停##Style", &mut (*config).style.colors.tab_hovered);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Tab Active##Style", &mut (*config).style.colors.tab_active);
+                        color_edit_u32_tuple(ui, "标签激活##Style", &mut (*config).style.colors.tab_active);
                         ui.same_line();
-                        color_edit_u32_tuple(ui, "Separator##Style", &mut (*config).style.colors.separator);
+                        color_edit_u32_tuple(ui, "分隔符##Style", &mut (*config).style.colors.separator);
                     }
                 });
 
                 // Settings
-                TabItem::new("Settings").build(&ui, || {
+                TabItem::new("设置").build(&ui, || {
                     // Enabled
-                    ui.checkbox("Settings", &mut (*config).settings.enabled);
+                    ui.checkbox("设置", &mut (*config).settings.enabled);
 
                     if (*config).settings.enabled {
                         ui.separator();
 
                         // Bypass Capture
-                        ui.checkbox("Bypass Capture##Settings", &mut (*config).settings.bypass_capture);
+                        ui.checkbox("防录屏##Settings", &mut (*config).settings.bypass_capture);
                         ui.separator();
 
                         // Exclude Team & Show on Spectate
-                        ui.checkbox("Exclude Team##Settings", &mut (*config).settings.exclude_team);
-                        ui.checkbox("Show On Spectate##Settings", &mut (*config).settings.show_on_spectate);
+                        ui.checkbox("排除队友##Settings", &mut (*config).settings.exclude_team);
+                        ui.checkbox("观战时显示##Settings", &mut (*config).settings.show_on_spectate);
 
                         // Toggle Background Alpha
                         ui.separator();
@@ -988,7 +988,7 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Config
-                TabItem::new("Config").build(&ui, || {
+                TabItem::new("配置").build(&ui, || {
                     // Config Input & Create Button
                     ui.input_text("##NameConfig", &mut *new_config_name).build();
                     ui.same_line();
@@ -1087,7 +1087,7 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Info
-                TabItem::new("Info").build(&ui, || {
+                TabItem::new("信息").build(&ui, || {
                     // Title
                     ui.text(ProgramConfig::Package::Name);
                     ui.text(ProgramConfig::Package::Description);

@@ -17,10 +17,6 @@ pub fn is_enemy_at_crosshair(local_entity_pawn_address: u64, local_entity_contro
         return (false, false, 0, None);
     }
 
-    if !rpm_offset(local_entity_pawn_address, Offsets::C_CSPlayerPawnBase::m_iIDEntIndex as u64, &mut u_handle) {
-        return (false, false, 0, None);
-    }
-
     let list_entry: u64 = trace_address(game_address_entity_list, &[0x8 * u_handle.wrapping_shr(9) + 0x10, 0x0]);
 
     if list_entry == 0 {
@@ -29,7 +25,7 @@ pub fn is_enemy_at_crosshair(local_entity_pawn_address: u64, local_entity_contro
 
     let mut pawn_address: u64 = 0;
 
-    if let Some(sum) = (0x78 as u64).checked_mul(u_handle.bitand(0x1FF) as u64) {
+    if let Some(sum) = (0x70 as u64).checked_mul(u_handle.bitand(0x1FF) as u64) {
         if !rpm_offset(list_entry, sum, &mut pawn_address) {
             return (false, false, 0, None);
         }

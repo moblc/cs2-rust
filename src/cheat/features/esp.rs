@@ -372,7 +372,7 @@ pub fn render_bomb(ui: &mut Ui, pos: Vector3<f32>, local_pawn_pos: Vector3<f32>,
     render_box_bomb(ui, rect, config);
 
     if config.esp.name_enabled {
-        render_bomb_name(ui, &format!("Bomb ({})", bomb_site), rect, config);
+        render_bomb_name(ui, &format!("炸弹 ({})", bomb_site), rect, config);
     }
 
     if config.esp.distance_enabled {

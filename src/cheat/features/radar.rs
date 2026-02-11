@@ -50,7 +50,7 @@ pub fn render_radar(ui: &mut Ui, config: Config, local_pos: Vector3<f32>, local_
 
     drop(reset_position);
 
-    ui.window("Radar")
+    ui.window("雷达")
         .collapsible(false)
         .resizable(false)
         .bg_alpha(0.0)

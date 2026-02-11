@@ -24,7 +24,7 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
     drop(reset_position);
 
-    ui.window("Cheats")
+    ui.window("功能")
         .collapsible(false)
         .always_auto_resize(true)
         .position(window_position, condition)
@@ -38,7 +38,7 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
             let cheat_list_two_color = Vector4 { x: cheat_list_two_f32.0, y: cheat_list_two_f32.1, z: cheat_list_two_f32.2, w: cheat_list_two_f32.3 };
 
             if config.esp.enabled {
-                ui.text_colored(cheat_list_one_color, "ESP");
+                ui.text_colored(cheat_list_one_color, "透视");
 
                 if !config.esp.always {
                     ui.same_line();
@@ -47,12 +47,12 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
                 if esp_toggled {
                     ui.same_line();
-                    ui.text_colored(cheat_list_two_color, "(Toggled)");
+                    ui.text_colored(cheat_list_two_color, "(已激活)");
                 }
             }
 
             if pawn && config.rcs.enabled {
-                ui.text_colored(cheat_list_one_color, "RCS");
+                ui.text_colored(cheat_list_one_color, "后坐力控制");
 
                 if !config.rcs.always {
                     ui.same_line();
@@ -61,12 +61,12 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
                 if rcs_toggled {
                     ui.same_line();
-                    ui.text_colored(cheat_list_two_color, "(Toggled)");
+                    ui.text_colored(cheat_list_two_color, "(已激活)");
                 }
             }
 
             if pawn && config.aimbot.enabled {
-                ui.text_colored(cheat_list_one_color, "Aimbot");
+                ui.text_colored(cheat_list_one_color, "自瞄");
 
                 if !config.aimbot.always {
                     ui.same_line();
@@ -75,12 +75,12 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
                 if aimbot_toggled {
                     ui.same_line();
-                    ui.text_colored(cheat_list_two_color, "(Toggled)");
+                    ui.text_colored(cheat_list_two_color, "(已激活)");
                 }
             }
 
             if pawn && config.triggerbot.enabled {
-                ui.text_colored(cheat_list_one_color, "Triggerbot");
+                ui.text_colored(cheat_list_one_color, "自动扳机");
 
                 if !config.triggerbot.always {
                     ui.same_line();
@@ -89,12 +89,12 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
                 if triggerbot_toggled {
                     ui.same_line();
-                    ui.text_colored(cheat_list_two_color, "(Toggled)");
+                    ui.text_colored(cheat_list_two_color, "(已激活)");
                 }
             }
 
             if config.crosshair.enabled {
-                ui.text_colored(cheat_list_one_color, "Crosshair");
+                ui.text_colored(cheat_list_one_color, "准星");
 
                 if !config.crosshair.always {
                     ui.same_line();
@@ -103,12 +103,12 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
                 if crosshair_toggled {
                     ui.same_line();
-                    ui.text_colored(cheat_list_two_color, "(Toggled)");
+                    ui.text_colored(cheat_list_two_color, "(已激活)");
                 }
             }
 
             if config.radar.enabled {
-                ui.text_colored(cheat_list_one_color, "Radar");
+                ui.text_colored(cheat_list_one_color, "雷达");
 
                 if !config.radar.always {
                     ui.same_line();
@@ -117,19 +117,19 @@ pub fn render_cheat_list(ui: &mut Ui, config: Config, pawn: bool, aimbot_toggled
 
                 if radar_toggled {
                     ui.same_line();
-                    ui.text_colored(cheat_list_two_color, "(Toggled)");
+                    ui.text_colored(cheat_list_two_color, "(已激活)");
                 }
             }
 
             if config.settings.enabled {
-                ui.text_colored(cheat_list_one_color, "Settings");
+                ui.text_colored(cheat_list_one_color, "设置");
 
                 if config.settings.bypass_capture {
-                    ui.text_colored(cheat_list_two_color, "- Bypass Capture");
+                    ui.text_colored(cheat_list_two_color, "- 防录屏");
                 }
 
                 if config.settings.exclude_team {
-                    ui.text_colored(cheat_list_two_color, "- Exclude Team");
+                    ui.text_colored(cheat_list_two_color, "- 排除队友");
                 }
             }
         });

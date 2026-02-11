@@ -20,7 +20,9 @@ pub fn get_current_time() -> String {
 
     if let Ok(duration) = now.duration_since(SystemTime::UNIX_EPOCH) {
         let secs = duration.as_secs();
-        return format!("{:02}:{:02}:{:02}", (secs / 3600) % 24, (secs / 60) % 60, secs % 60);
+        // Add 8 hours (28800 seconds) for UTC+8 timezone
+        let secs_utc8 = secs + 28800;
+        return format!("{:02}:{:02}:{:02}", (secs_utc8 / 3600) % 24, (secs_utc8 / 60) % 60, secs_utc8 % 60);
     } else {
         return "00:00:00".to_string();
     }

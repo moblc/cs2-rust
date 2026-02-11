@@ -53,7 +53,7 @@ pub fn render_bomb_timer(ui: &mut Ui, bomb_planted: bool, bomb_site: Option<Stri
         }
     };
 
-    ui.window("Bomb")
+    ui.window("炸弹")
         .collapsible(false)
         .always_auto_resize(true)
         .position(window_position, condition)
@@ -67,17 +67,17 @@ pub fn render_bomb_timer(ui: &mut Ui, bomb_planted: bool, bomb_site: Option<Stri
             let enabled_color = Vector4 { x: enabled.0, y: enabled.1, z: enabled.2, w: enabled.3 };
 
             if no_pawn {
-                ui.text_colored(disabled_color, "Couldn't fetch information.")
+                ui.text_colored(disabled_color, "无法获取信息。")
             } else if *is_planted && remaining_time.is_some() && plant_time.is_some() && bomb_site.is_some() && remaining_time.unwrap() > 0 {
-                ui.text("The bomb has been planted at");
+                ui.text("炸弹已安放在");
                 ui.same_line();
-                ui.text_colored(enabled_color, format!("Site {}.", bomb_site.unwrap()));
+                ui.text_colored(enabled_color, format!("{}点。", bomb_site.unwrap()));
 
-                ui.text_colored(enabled_color, format!("{} seconds", remaining_time.unwrap()));
+                ui.text_colored(enabled_color, format!("{} 秒", remaining_time.unwrap()));
                 ui.same_line();
-                ui.text("remaining!");
+                ui.text("后爆炸！");
             } else {
-                ui.text_colored(disabled_color, "The bomb has not been planted.")
+                ui.text_colored(disabled_color, "炸弹尚未安放。")
             }
         });
 }

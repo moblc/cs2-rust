@@ -77,10 +77,10 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.checkbox("轮廓##ESP", &mut (*config).esp.outline);
 
                         // Thickness
-                        ui.slider_config("Thickness##ESP", 0.5, 5.0).display_format("%.1f").build(&mut (*config).esp.thickness);
+                        ui.slider_config("粗细##ESP", 0.5, 5.0).display_format("%.1f").build(&mut (*config).esp.thickness);
 
                         // Rounding
-                        ui.slider_config("Rounding##ESP", 0, 15).display_format("%d").build(&mut (*config).esp.rounding);
+                        ui.slider_config("圆角##ESP", 0, 15).display_format("%d").build(&mut (*config).esp.rounding);
                         ui.separator();
 
                         // Box
@@ -285,7 +285,7 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Sensitivity
-                        ui.slider_config("Mouse Sensitivity##RCS", 0.1, 8.0).display_format("%.1f").build(&mut (*config).rcs.sensitivity);
+                        ui.slider_config("鼠标灵敏度##RCS", 0.1, 8.0).display_format("%.1f").build(&mut (*config).rcs.sensitivity);
                         ui.separator();
 
                         // Function
@@ -294,14 +294,14 @@ pub fn render_menu(ui: &mut Ui) {
                                 let conf = $conf;
 
                                 // Start Bullet
-                                ui.slider_config("Start Bullet##RCS", 0, 6).display_format("%d").build(&mut conf.start_bullet);
+                                ui.slider_config("起始子弹##RCS", 0, 6).display_format("%d").build(&mut conf.start_bullet);
                                 ui.separator();
 
                                 // Yaw, Yaw Offset, Pitch, & Pitch Offset
-                                ui.slider_config("Yaw##RCS", 0.0, 2.0).display_format("%.1f").build(&mut conf.yaw);
-                                ui.slider_config("Yaw Offset##Aimbot", 0.0, 1.0).display_format("%.1f").build(&mut conf.yaw_offset);
-                                ui.slider_config("Pitch##RCS", 0.0, 2.0).display_format("%.1f").build(&mut conf.pitch);
-                                ui.slider_config("Pitch Offset##Aimbot", 0.0, 1.0).display_format("%.1f").build(&mut conf.pitch_offset);
+                                ui.slider_config("偏航##RCS", 0.0, 2.0).display_format("%.1f").build(&mut conf.yaw);
+                                ui.slider_config("偏航偏移##Aimbot", 0.0, 1.0).display_format("%.1f").build(&mut conf.yaw_offset);
+                                ui.slider_config("俯仰##RCS", 0.0, 2.0).display_format("%.1f").build(&mut conf.pitch);
+                                ui.slider_config("俯仰偏移##Aimbot", 0.0, 1.0).display_format("%.1f").build(&mut conf.pitch_offset);
                             }
                         }
 
@@ -310,31 +310,31 @@ pub fn render_menu(ui: &mut Ui) {
                             rcs_conf!(&mut (*config).rcs.configs.shared);
                         } else {
                             TabBar::new("##RCSConfigs").build(&ui, || {
-                                TabItem::new("Pistol").build(&ui, || {
+                                TabItem::new("手枪").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.pistol);
                                 });
 
-                                TabItem::new("Rifle").build(&ui, || {
+                                TabItem::new("步枪").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.rifle);
                                 });
 
-                                TabItem::new("Submachine").build(&ui, || {
+                                TabItem::new("冲锋枪").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.submachine);
                                 });
 
-                                TabItem::new("Sniper").build(&ui, || {
+                                TabItem::new("狙击枪").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.sniper);
                                 });
 
-                                TabItem::new("Shotgun").build(&ui, || {
+                                TabItem::new("霰弹枪").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.shotgun);
                                 });
 
-                                TabItem::new("Machine Gun").build(&ui, || {
+                                TabItem::new("机枪").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.machinegun);
                                 });
 
-                                TabItem::new("Other").build(&ui, || {
+                                TabItem::new("其他").build(&ui, || {
                                     rcs_conf!(&mut (*config).rcs.configs.other);
                                 });
                             });
@@ -397,36 +397,36 @@ pub fn render_menu(ui: &mut Ui) {
                                     ui.checkbox("轮廓##AimbotCircle", &mut conf.fov_circle_outline_enabled);
         
                                     // Only Toggled
-                                    ui.checkbox("仅切换时##AimbotCircle", &mut conf.fov_circle_only_toggled);
+                                    ui.checkbox("自瞄圈显示##AimbotCircle", &mut conf.fov_circle_only_toggled);
         
                                     // Thickness
-                                    ui.slider_config("Thickness##AimbotCircle", 0.5, 5.0).display_format("%.1f").build(&mut conf.fov_circle_thickness);
+                                    ui.slider_config("粗细##AimbotCircle", 0.5, 5.0).display_format("%.1f").build(&mut conf.fov_circle_thickness);
                                 }
         
                                 // Only Visible, Only Grounded, & Only Weapon
                                 ui.separator();
-                                ui.checkbox("仅可见##Aimbot", &mut conf.only_visible);
-                                ui.checkbox("仅地面##Aimbot", &mut conf.only_grounded);
+                                ui.checkbox("可视判断##Aimbot", &mut conf.only_visible);
+                                ui.checkbox("空中判断##Aimbot", &mut conf.only_grounded);
                                 ui.separator();
         
                                 // Bones
                                 ui.checkbox("头部##Aimbot", &mut conf.bone_head);
                                 ui.checkbox("颈部##Aimbot", &mut conf.bone_neck);
                                 ui.checkbox("脊柱##Aimbot", &mut conf.bone_spine);
-                                ui.checkbox("骨盆##Aimbot", &mut conf.bone_pelvis);
+                                ui.checkbox("盆骨##Aimbot", &mut conf.bone_pelvis);
                                 ui.separator();
         
-                                ui.slider_config("Fov##Aimbot", 1, 89).display_format("%d").build(&mut conf.fov);
+                                ui.slider_config("自瞄范围##Aimbot", 1, 89).display_format("%d").build(&mut conf.fov);
                                 ui.separator();
         
                                 // Smooth
-                                ui.slider_config("Smooth##Aimbot", 0.0, 5.0).display_format("%.1f").build(&mut conf.smooth);
-                                ui.slider_config("Smooth Offset##Aimbot", 0.0, 1.0).display_format("%.1f").build(&mut conf.smooth_offset);
+                                ui.slider_config("平滑##Aimbot", 0.0, 5.0).display_format("%.1f").build(&mut conf.smooth);
+                                ui.slider_config("平滑偏移##Aimbot", 0.0, 1.0).display_format("%.1f").build(&mut conf.smooth_offset);
                                 ui.separator();
         
                                 // Delay
-                                ui.slider_config("Delay##Aimbot", 0, 500).display_format("%d").build(&mut conf.delay);
-                                ui.slider_config("Delay Offset##Aimbot", 0, 100).display_format("%d").build(&mut conf.delay_offset);
+                                ui.slider_config("延迟##Aimbot", 0, 500).display_format("%d").build(&mut conf.delay);
+                                ui.slider_config("延迟偏移##Aimbot", 0, 100).display_format("%d").build(&mut conf.delay_offset);
                                 ui.separator();
 
                                 // Distance
@@ -451,35 +451,35 @@ pub fn render_menu(ui: &mut Ui) {
                             aimbot_conf!(&mut (*config).aimbot.configs.shared);
                         } else {
                             TabBar::new("##AimbotConfigs").build(&ui, || {
-                                TabItem::new("Pistol").build(&ui, || {
+                                TabItem::new("手枪").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.pistol);
                                 });
 
-                                TabItem::new("Rifle").build(&ui, || {
+                                TabItem::new("步枪").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.rifle);
                                 });
 
-                                TabItem::new("Submachine").build(&ui, || {
+                                TabItem::new("冲锋枪").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.submachine);
                                 });
 
-                                TabItem::new("Sniper").build(&ui, || {
+                                TabItem::new("狙击枪").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.sniper);
                                 });
 
-                                TabItem::new("Shotgun").build(&ui, || {
+                                TabItem::new("霰弹枪").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.shotgun);
                                 });
 
-                                TabItem::new("Machine Gun").build(&ui, || {
+                                TabItem::new("机枪").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.machinegun);
                                 });
 
-                                TabItem::new("Knife").build(&ui, || {
+                                TabItem::new("近战").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.knife);
                                 });
 
-                                TabItem::new("Other").build(&ui, || {
+                                TabItem::new("其他").build(&ui, || {
                                     aimbot_conf!(&mut (*config).aimbot.configs.other);
                                 });
                             });
@@ -529,15 +529,15 @@ pub fn render_menu(ui: &mut Ui) {
                                 if conf.action == 0 {
                                     // Interval
                                     ui.separator();
-                                    ui.slider_config("Interval##Triggerbot", 50, 500).display_format("%d").build(&mut conf.tap_interval);
-                                    ui.slider_config("Interval Offset##Triggerbot", 0, 100).display_format("%d").build(&mut conf.tap_interval_offset);
+                                    ui.slider_config("间隔##Triggerbot", 50, 500).display_format("%d").build(&mut conf.tap_interval);
+                                    ui.slider_config("间隔偏移##Triggerbot", 0, 100).display_format("%d").build(&mut conf.tap_interval_offset);
                                 }
 
                                 ui.separator();
 
                                 // Delay
-                                ui.slider_config("Delay##Triggerbot", 0, 500).display_format("%d").build(&mut conf.delay);
-                                ui.slider_config("Delay Offset##Triggerbot", 0, 100).display_format("%d").build(&mut conf.delay_offset);
+                                ui.slider_config("延迟##Triggerbot", 0, 500).display_format("%d").build(&mut conf.delay);
+                                ui.slider_config("延迟偏移##Triggerbot", 0, 100).display_format("%d").build(&mut conf.delay_offset);
                                 ui.separator();
 
                                 // Distance
@@ -562,35 +562,35 @@ pub fn render_menu(ui: &mut Ui) {
                             triggerbot_conf!(&mut (*config).triggerbot.configs.shared);
                         } else {
                             TabBar::new("##TriggerbotConfigs").build(&ui, || {
-                                TabItem::new("Pistol").build(&ui, || {
+                                TabItem::new("手枪").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.pistol);
                                 });
 
-                                TabItem::new("Rifle").build(&ui, || {
+                                TabItem::new("步枪").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.rifle);
                                 });
 
-                                TabItem::new("Submachine").build(&ui, || {
+                                TabItem::new("冲锋枪").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.submachine);
                                 });
 
-                                TabItem::new("Sniper").build(&ui, || {
+                                TabItem::new("狙击枪").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.sniper);
                                 });
 
-                                TabItem::new("Shotgun").build(&ui, || {
+                                TabItem::new("霰弹枪").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.shotgun);
                                 });
 
-                                TabItem::new("Machine Gun").build(&ui, || {
+                                TabItem::new("机枪").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.machinegun);
                                 });
 
-                                TabItem::new("Knife").build(&ui, || {
+                                TabItem::new("近战").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.knife);
                                 });
 
-                                TabItem::new("Other").build(&ui, || {
+                                TabItem::new("其他").build(&ui, || {
                                     triggerbot_conf!(&mut (*config).triggerbot.configs.other);
                                 });
                             });
@@ -669,10 +669,10 @@ pub fn render_menu(ui: &mut Ui) {
                                 ui.checkbox("线条##Crosshair", &mut conf.lines_enabled);
                                 
                                 if conf.lines_enabled {
-                                    ui.slider_config("Width##CrosshairLines", 1, 20).display_format("%d").build(&mut conf.lines_width);
-                                    ui.slider_config("Height##CrosshairLines", 1, 20).display_format("%d").build(&mut conf.lines_height);
-                                    ui.slider_config("Space##CrosshairLines", 1, 10).display_format("%d").build(&mut conf.lines_space);
-                                    ui.slider_config("Thickness##CrosshairLines", 1, 10).display_format("%d").build(&mut conf.lines_thickness);
+                                    ui.slider_config("宽度##CrosshairLines", 1, 20).display_format("%d").build(&mut conf.lines_width);
+                                    ui.slider_config("高度##CrosshairLines", 1, 20).display_format("%d").build(&mut conf.lines_height);
+                                    ui.slider_config("间距##CrosshairLines", 1, 10).display_format("%d").build(&mut conf.lines_space);
+                                    ui.slider_config("粗细##CrosshairLines", 1, 10).display_format("%d").build(&mut conf.lines_thickness);
                                 }
                             }
                         }
@@ -682,35 +682,35 @@ pub fn render_menu(ui: &mut Ui) {
                             crosshair_conf!(&mut (*config).crosshair.configs.shared);
                         } else {
                             TabBar::new("##CrosshairConfigs").build(&ui, || {
-                                TabItem::new("Pistol").build(&ui, || {
+                                TabItem::new("手枪").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.pistol);
                                 });
 
-                                TabItem::new("Rifle").build(&ui, || {
+                                TabItem::new("步枪").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.rifle);
                                 });
 
-                                TabItem::new("Submachine").build(&ui, || {
+                                TabItem::new("冲锋枪").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.submachine);
                                 });
 
-                                TabItem::new("Sniper").build(&ui, || {
+                                TabItem::new("狙击枪").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.sniper);
                                 });
 
-                                TabItem::new("Shotgun").build(&ui, || {
+                                TabItem::new("霰弹枪").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.shotgun);
                                 });
 
-                                TabItem::new("Machine Gun").build(&ui, || {
+                                TabItem::new("机枪").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.machinegun);
                                 });
 
-                                TabItem::new("Knife").build(&ui, || {
+                                TabItem::new("近战").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.knife);
                                 });
 
-                                TabItem::new("Other").build(&ui, || {
+                                TabItem::new("其他").build(&ui, || {
                                     crosshair_conf!(&mut (*config).crosshair.configs.other);
                                 });
                             });
@@ -768,7 +768,7 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.combo_simple_string("样式##Radar", &mut (*config).radar.style, &["圆形", "箭头", "两者"]);
 
                         // Radar Alpha
-                        ui.slider_config("Alpha##Radar", 0.0, 1.0).display_format("%.1f").build(&mut (*config).radar.alpha);
+                        ui.slider_config("透明度##Radar", 0.0, 1.0).display_format("%.1f").build(&mut (*config).radar.alpha);
                         ui.separator();
 
                         // Radar Outline
@@ -785,9 +785,9 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Point Size, Proportion, & Radar Range
-                        ui.slider_config("Point Size##Radar", 1.0, 2.0).display_format("%.1f").build(&mut (*config).radar.point_size);
-                        ui.slider_config("Proportion##Radar", 10, 350).display_format("%d").build(&mut (*config).radar.proportion);
-                        ui.slider_config("Range##Radar", 100, 300).display_format("%d").build(&mut (*config).radar.range);
+                        ui.slider_config("点大小##Radar", 1.0, 2.0).display_format("%.1f").build(&mut (*config).radar.point_size);
+                        ui.slider_config("比例##Radar", 10, 350).display_format("%d").build(&mut (*config).radar.proportion);
+                        ui.slider_config("范围##Radar", 100, 300).display_format("%d").build(&mut (*config).radar.range);
                     }
                 });
 
@@ -800,7 +800,7 @@ pub fn render_menu(ui: &mut Ui) {
                         ui.separator();
 
                         // Watermark & Cheat List
-                        ui.checkbox("水印##Misc", &mut (*config).misc.watermark_enabled);
+                        ui.checkbox("时间##Misc", &mut (*config).misc.watermark_enabled);
 
                         if (*config).misc.watermark_enabled {
                             ui.same_line();
@@ -809,7 +809,7 @@ pub fn render_menu(ui: &mut Ui) {
                             color_edit_u32_tuple(ui, "##ColorMiscWatermarkTwo", &mut (*config).misc.watermark_color_two);
                         }
 
-                        ui.checkbox("功能列表##Misc", &mut (*config).misc.cheat_list_enabled);
+                        ui.checkbox("已开启功能##Misc", &mut (*config).misc.cheat_list_enabled);
 
                         if (*config).misc.cheat_list_enabled {
                             ui.same_line();
@@ -979,11 +979,11 @@ pub fn render_menu(ui: &mut Ui) {
 
                         // Exclude Team & Show on Spectate
                         ui.checkbox("排除队友##Settings", &mut (*config).settings.exclude_team);
-                        ui.checkbox("观战时显示##Settings", &mut (*config).settings.show_on_spectate);
+                        ui.checkbox("观战模式##Settings", &mut (*config).settings.show_on_spectate);
 
                         // Toggle Background Alpha
                         ui.separator();
-                        ui.slider_config("Toggle Alpha##Settings", 0.0, 1.0).display_format("%.1f").build(&mut (*config).settings.toggle_bg_alpha);
+                        ui.slider_config("切换透明度##Settings", 0.0, 1.0).display_format("%.1f").build(&mut (*config).settings.toggle_bg_alpha);
                     }
                 });
 
@@ -993,7 +993,7 @@ pub fn render_menu(ui: &mut Ui) {
                     ui.input_text("##NameConfig", &mut *new_config_name).build();
                     ui.same_line();
 
-                    if ui.button("Create##Config") {
+                    if ui.button("创建##Config") {
                         if *new_config_name != "" {
                             let new_config_path = format!("{}.{}", *new_config_name, *CONFIG_EXTENSION);
                             let directory_pathbuf = PathBuf::from(&*config_dir);
@@ -1001,7 +1001,7 @@ pub fn render_menu(ui: &mut Ui) {
                             
                             if let Some(config_path) = directory_pathbuf.join(new_config_path.clone()).to_str() {
                                 match new_config.save_config(config_path, true) {
-                                    Err(error) => create_messagebox(MessageBoxStyle::Error, "Error", &format!("Failed to create new config: {} ({}).", new_config_path, error)),
+                                    Err(error) => create_messagebox(MessageBoxStyle::Error, "错误", &format!("创建配置失败: {} ({}).", new_config_path, error)),
                                     Ok(_) => {
                                         *new_config_name = "".to_string();
                                         *config = new_config;
@@ -1035,7 +1035,7 @@ pub fn render_menu(ui: &mut Ui) {
                                 reset_window_positions(config_item.window_positions);
                             }
                         } else {
-                            ui.selectable_config(format!("{} (failed)", config_name.replace(&format!(".{}", *CONFIG_EXTENSION), ""))).disabled(true).build();
+                            ui.selectable_config(format!("{} (失败)", config_name.replace(&format!(".{}", *CONFIG_EXTENSION), ""))).disabled(true).build();
                         }
                     }
 
@@ -1055,9 +1055,9 @@ pub fn render_menu(ui: &mut Ui) {
                         if let Some(config_path) = PathBuf::from(&*config_dir).join(config_name).to_str() {
                             ui.separator();
 
-                            if ui.button("Save##Config") {
+                            if ui.button("保存##Config") {
                                 match (*config).save_config(config_path, false) {
-                                    Err(error) => create_messagebox(MessageBoxStyle::Error, "Error", &format!("Failed to save config: {} ({}).", config_name, error)),
+                                    Err(error) => create_messagebox(MessageBoxStyle::Error, "错误", &format!("保存配置失败: {} ({}).", config_name, error)),
                                     Ok(_) => {}
                                 }
                             }
@@ -1065,9 +1065,9 @@ pub fn render_menu(ui: &mut Ui) {
                             if config_name != &*DEFAULT_CONFIG {
                                 ui.same_line();
 
-                                if ui.button("Delete##Config") {
+                                if ui.button("删除##Config") {
                                     match delete_config(config_path) {
-                                        Err(error) => create_messagebox(MessageBoxStyle::Error, "Error", &format!("Failed to delete config: {} ({}).", config_name, error)),
+                                        Err(error) => create_messagebox(MessageBoxStyle::Error, "错误", &format!("删除配置失败: {} ({}).", config_name, error)),
                                         Ok(_) => {}
                                     }
                                 }
@@ -1077,7 +1077,7 @@ pub fn render_menu(ui: &mut Ui) {
 
                     ui.same_line();
                     
-                    if ui.button("Reset##Config") {
+                    if ui.button("重置##Config") {
                         let default_config = Config::default();
 
                         *config = default_config;
@@ -1087,6 +1087,7 @@ pub fn render_menu(ui: &mut Ui) {
                 });
 
                 // Info
+                /*
                 TabItem::new("信息").build(&ui, || {
                     // Title
                     ui.text(ProgramConfig::Package::Name);
@@ -1094,26 +1095,27 @@ pub fn render_menu(ui: &mut Ui) {
                     ui.separator();
 
                     // Info
-                    ui.text(format!("Version: {}", ProgramConfig::Package::Version));
-                    ui.text(format!("Author(s): {}", ProgramConfig::Package::Authors.replace(":", ", ")));
+                    ui.text(format!("版本: {}", ProgramConfig::Package::Version));
+                    ui.text(format!("作者: {}", ProgramConfig::Package::Authors.replace(":", ", ")));
                 });
+                */
             });
 
             ui.separator();
-            ui.text(format!("Toggle: {:?}", ProgramConfig::Keys::ToggleKey));
+            ui.text(format!("菜单显示/隐藏: {:?}", ProgramConfig::Keys::ToggleKey));
 
             ui.same_line();
-            ui.text(format!("| Exit: {:?}", ProgramConfig::Keys::ExitKey));
+            ui.text(format!("| 退出: {:?}", ProgramConfig::Keys::ExitKey));
 
             if let Some(loaded_config) = &loaded_config.lock().unwrap().clone() {
                 ui.same_line();
-                ui.text(format!("| Config: \"{}\"", loaded_config.replace(&format!(".{}", *CONFIG_EXTENSION), "")));
+                ui.text(format!("| 配置: \"{}\"", loaded_config.replace(&format!(".{}", *CONFIG_EXTENSION), "")));
 
                 if let Some(current_config) = configs.get(loaded_config) {
                     if let Some(current_config) = current_config {
                         if current_config != &*config {
                             ui.same_line();
-                            ui.text("(modified)");
+                            ui.text("(已修改)");
                         }
                     }
                 }
